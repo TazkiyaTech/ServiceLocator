@@ -8,11 +8,11 @@
 
 import Foundation
 
-class ServiceLocator {
+public class ServiceLocator {
     
     private var services = [ObjectIdentifier: Any]()
     
-    func getServiceOfType<T>(_ type: T.Type) throws -> T {
+    public func getServiceOfType<T>(_ type: T.Type) throws -> T {
         
         let serviceIdentifier = ObjectIdentifier(type)
         let service = services[serviceIdentifier]
@@ -24,13 +24,13 @@ class ServiceLocator {
         return service as! T
     }
     
-    func addModule(_ module: Module) throws {
+    public func addModule(_ module: Module) throws {
         try module.getServices().forEach { (service) in
             try addService(service)
         }
     }
     
-    func addService(_ service: Any) throws {
+    public func addService(_ service: Any) throws {
         
         let serviceType = type(of: service)
         let serviceIdentifier = ObjectIdentifier(serviceType)

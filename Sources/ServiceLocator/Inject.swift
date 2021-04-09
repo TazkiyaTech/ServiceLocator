@@ -9,17 +9,17 @@
 import Foundation
 
 @propertyWrapper
-struct Inject<T> {
+public struct Inject<T> {
     
     private let serviceLocator: ServiceLocator
     
-    var wrappedValue: T {
+    public var wrappedValue: T {
         get {
             try! serviceLocator.getServiceOfType(T.self)
         }
     }
     
-    init(via serviceLocator: ServiceLocator) {
+    public init(via serviceLocator: ServiceLocator) {
         self.serviceLocator = serviceLocator
     }
 }
