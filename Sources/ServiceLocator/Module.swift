@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Defines a group of services.
 public protocol Module {
+    
+    /// - Returns: The services defined by this module.
     func getServices() -> [Any]
 }
