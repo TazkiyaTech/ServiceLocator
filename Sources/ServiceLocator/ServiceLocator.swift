@@ -12,6 +12,8 @@ public class ServiceLocator {
     
     private var services = [ObjectIdentifier: Any]()
     
+    public init() {}
+    
     public func getServiceOfType<T>(_ type: T.Type) throws -> T {
         
         let serviceIdentifier = ObjectIdentifier(type)
