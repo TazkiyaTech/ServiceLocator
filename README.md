@@ -11,7 +11,7 @@ Swift package offering a simple in-memory bucket into which services (i.e. objec
 
 The purpose of this Swift package is to offer a means by which an application can initialise and register all of its services into an in-memory bucket at start-up and then obtain these services later in the application's view controllers and integration tests without the view controllers and integration tests having to concern themselves with the details of how these services are initialised.
 
-The main class offered by this Swift package is the [ServiceLocator](Sources/ServiceLocator/ServiceLocator.swift) class. This class offes three methods as follows:
+The main class offered by this Swift package is the [ServiceLocator](Sources/ServiceLocator/ServiceLocator.swift) class. This class defines three methods as follows:
 
 * `addService(service:)` – Adds the given service to the service locator.
 * `addModule(module:)` – Adds each of the services defined in the given [Module](Sources/ServiceLocator/Module.swift) to the service locator.
