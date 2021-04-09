@@ -19,7 +19,7 @@ The main class offered by this Swift package is the [ServiceLocator](Sources/Ser
 
 ### Registering services
 
-Let's assume we're going to register services into the service locator by means of modules rather than registering services into the service locator directly. Let's assume also, for the purposes of example, that our application consists of two modules – `ModuleA` and `ModuleB` – and `ModuleA` defines a service which a service in `ModuleB` depends on. Then, firstly, `ModuleA` will look something like:
+Let's assume we're going to register services into the service locator grouped by modules rather than registering services into the service locator directly. Let's assume also, for the purposes of example, that our application consists of two modules – `ModuleA` and `ModuleB` – and `ModuleA` defines a service which a service in `ModuleB` depends on. Then, firstly, `ModuleA` will look something like:
 
 ```
 import ServiceLocator
@@ -63,9 +63,9 @@ try serviceLocator.addModule(ModuleB(serviceLocator))
 
 ### Retrieving services
 
-The only two places where services should be retrieved from a `ServiceLocator` object (once it has been defined and all services have been added to it) are the view controllers and the test classes. All other calls to the `ServiceLocator.getServiceOfType(type:)` method are considered an abuse.
+The only two places where services should be sought out from a `ServiceLocator` object (once it has been defined and all services have been added to it) are the application's view controllers and the test classes. All other calls to the `ServiceLocator.getServiceOfType(type:)` method are considered an abuse.
 
-Assuming the existence of a `ServiceLocator` object named `serviceLocator` in a view controller or a test class, a service can be retrieved from the service locator as follows:
+Assuming the presence of a `ServiceLocator` object named `serviceLocator` in a view controller or test class, a service can be retrieved from the service locator as follows:
 
 ```
 @Inject(via: serviceLocator) var someService: SomeService
