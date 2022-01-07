@@ -9,7 +9,7 @@ Swift package offering a simple in-memory bucket into which services (i.e. objec
 
 ## Usage
 
-The purpose of this Swift package is to offer a means by which an application can initialise and register all of its services into an in-memory bucket at start-up and then obtain these services later in the application's view controllers and tests without the view controllers and tests having to concern themselves with the details of how these services are initialised.
+The purpose of this Swift package is to offer a means by which an application can initialise and register all of its services into an in-memory bucket at start-up. Why? So that the application's view controllers and tests can obtain these services without having to concern themselves with the details of how these services are initialised.
 
 The main class offered by this Swift package is the [ServiceLocator](Sources/ServiceLocator/ServiceLocator.swift) class. This class defines three methods as follows:
 
@@ -25,8 +25,8 @@ Let's assume we're going to register services into the service locator grouped b
 import ServiceLocator
 
 class ModuleA: Module {
-    func getServices() -> [Any] {
-        return [ServiceA()]
+    func registerServices(in serviceLocator: ServiceLocator) throws {
+        try serviceLocator.addService(ServiceA())
     }
 }
 ```
@@ -37,17 +37,11 @@ Secondly, `ModuleB` will look something like this:
 import ServiceLocator
 
 class ModuleB: Module {
-    private let serviceLocator: ServiceLocator
-
-    init(_ serviceLocator: ServiceLocator) {
-        self.serviceLocator = serviceLocator
-    }
-
-    func getServices() -> [Any] {
-        let serviceA = try! serviceLocator.getServiceOfType(ServiceA.self)
+        func registerServices(in serviceLocator: ServiceLocator) throws {
+        let serviceA = try serviceLocator.getServiceOfType(ServiceA.self)
         let serviceB = ServiceB(serviceA)
-    
-        return [serviceB]
+
+        try serviceLocator.addService(serviceB)
     }
 }
 ```
@@ -58,14 +52,14 @@ Lastly, the `ServiceLocator` object will be defined as follows:
 let serviceLocator = ServiceLocator()
 
 try serviceLocator.addModule(ModuleA())
-try serviceLocator.addModule(ModuleB(serviceLocator))
+try serviceLocator.addModule(ModuleB())
 ```
 
 ### Retrieving services
 
 The only two places where services should be sought out from a `ServiceLocator` object (once it has been defined and all services have been added to it) are the application's view controllers and test classes. All other calls to the `ServiceLocator.getServiceOfType(type:)` method are considered an abuse.
 
-Assuming the presence of a `ServiceLocator` object named `serviceLocator` in a view controller or test class, a service is retrieved from the service locator as follows:
+Assume a view controller or test class has access to a `ServiceLocator` object named `serviceLocator`, then a service is retrieved from this `ServiceLocator` object as follows:
 
 ```
 @Inject(via: serviceLocator) var someService: SomeService
