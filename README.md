@@ -37,7 +37,7 @@ Secondly, `ModuleB` will look like this:
 import ServiceLocator
 
 class ModuleB: Module {
-        func registerServices(in serviceLocator: ServiceLocator) throws {
+    func registerServices(in serviceLocator: ServiceLocator) throws {
         let serviceA = try serviceLocator.getServiceOfType(ServiceA.self)
         let serviceB = ServiceB(serviceA)
 
