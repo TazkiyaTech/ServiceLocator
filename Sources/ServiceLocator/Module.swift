@@ -11,6 +11,9 @@ import Foundation
 /// Defines a group of services.
 public protocol Module {
     
-    /// - Returns: The services defined by this module.
-    func getServices() -> [Any]
+    /// Registers this module's services in the given `ServiceLocator`.
+    ///
+    /// - Parameter serviceLocator: The `ServiceLocator` into which this `Module` is to register its services.
+    /// - Throws: If an error is encountered on registering or retrieving a service to/from the given `ServiceLocator` instance.
+    func registerServices(in serviceLocator: ServiceLocator) throws
 }

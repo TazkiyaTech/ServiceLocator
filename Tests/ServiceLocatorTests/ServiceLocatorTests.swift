@@ -69,8 +69,9 @@ class ServiceLocatorTests: XCTestCase {
     }
     
     class TestModule: Module {
-        func getServices() -> [Any] {
-            return ["Some Service", 123456789]
+        func registerServices(in serviceLocator: ServiceLocator) throws {
+            try serviceLocator.addService("Some Service")
+            try serviceLocator.addService(123456789)
         }
     }
 }

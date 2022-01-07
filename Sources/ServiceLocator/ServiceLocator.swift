@@ -37,9 +37,7 @@ public class ServiceLocator {
     /// - Parameter module: the module to add to this service locator.
     /// - Throws: Throws an error if the given module defines a service which has a type that is already registered in this service locator.
     public func addModule(_ module: Module) throws {
-        try module.getServices().forEach { (service) in
-            try addService(service)
-        }
+        try module.registerServices(in: self)
     }
     
     /// Adds the given service to this service locator.
