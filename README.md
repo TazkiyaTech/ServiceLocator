@@ -19,7 +19,7 @@ The main class offered by this Swift package is the [ServiceLocator](Sources/Ser
 
 ### Registering services
 
-Let's assume we're going to register services into the service locator grouped by modules rather than registering services into the service locator individually. Let's assume also, for the purposes of example, that our application consists of two modules – `ModuleA` and `ModuleB` – and `ModuleA` defines a service which a service in `ModuleB` depends on. Then, firstly, `ModuleA` will look something like:
+Let's assume, for the purpose of example, that we're going to register services into a service locator grouped by modules rather than registering services individually. Let's assume also that our application consists of two modules – `ModuleA` and `ModuleB` – and `ModuleA` defines a service which `ModuleB` depends on. Then, firstly, `ModuleA` will look like this:
 
 ```
 import ServiceLocator
@@ -31,7 +31,7 @@ class ModuleA: Module {
 }
 ```
 
-Secondly, `ModuleB` will look something like this:
+Secondly, `ModuleB` will look like this:
 
 ```
 import ServiceLocator
@@ -59,7 +59,7 @@ try serviceLocator.addModule(ModuleB())
 
 The only two places where services should be sought out from a `ServiceLocator` object (once it has been defined and all services have been added to it) are the application's view controllers and test classes. All other calls to the `ServiceLocator.getServiceOfType(type:)` method are considered an abuse.
 
-Assume a view controller or test class has access to a `ServiceLocator` object named `serviceLocator`, then a service is retrieved from this `ServiceLocator` object as follows:
+Assume that a view controller or test class has access to a `ServiceLocator` object named `serviceLocator`. A service is retrieved from this `ServiceLocator` object as follows:
 
 ```
 @Inject(via: serviceLocator) var someService: SomeService
