@@ -78,7 +78,7 @@ class ServiceLocatorTests {
         #expect(error.message == "Failed adding service. Service of type 'String' already exists.")
     }
     
-    class TestModule: Module {
+    private class TestModule: Module {
         func registerServices(in serviceLocator: ServiceLocator) throws(ServiceLocatorError) {
             try serviceLocator.addService("Some Service")
             try serviceLocator.addService(123456789)

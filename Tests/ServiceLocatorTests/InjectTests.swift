@@ -8,10 +8,9 @@
 import Testing
 @testable import ServiceLocator
 
-@MainActor
 class InjectTests {
     
-    @Inject(via: serviceLocator) var someService: SomeService
+    @Inject(via: serviceLocator) private var someService: SomeService
     
     @Test
     func inject() {
@@ -19,8 +18,7 @@ class InjectTests {
     }
 }
 
-@MainActor
-let serviceLocator: ServiceLocator = {
+nonisolated(unsafe) private let serviceLocator: ServiceLocator = {
     let serviceLocator = ServiceLocator()
     
     try! serviceLocator.addService(SomeService())
@@ -28,6 +26,6 @@ let serviceLocator: ServiceLocator = {
     return serviceLocator
 }()
 
-class SomeService {
+private class SomeService {
     func execute() -> String { "Executed" }
 }
