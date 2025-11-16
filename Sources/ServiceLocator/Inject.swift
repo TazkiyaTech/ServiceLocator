@@ -9,15 +9,16 @@
 import Foundation
 
 
-/// A convenience property wrapper which makes it easier to pull out services from a `ServiceLocator` object.
+/// A convenience property wrapper which makes it easier to pull out services from a ``ServiceLocator`` object.
 ///
-/// Without this property wrapper, you would define properties in your `UIViewController` and `XCTestCase` classes as follows:
+/// Without this property wrapper, you would define properties in your view controller and test classes as follows:
 ///
 /// ```
 /// var someService: SomeService {
 ///     try! serviceLocator.getServiceOfType(SomeService.self)
 /// }
 /// ```
+///
 /// With this property wrapper, you can instead define properties as a one-liner as follows:
 ///
 /// ```

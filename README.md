@@ -25,7 +25,7 @@ Let's assume, for the purpose of example, that we're going to register services 
 import ServiceLocator
 
 class ModuleA: Module {
-    func registerServices(in serviceLocator: ServiceLocator) throws {
+    func registerServices(in serviceLocator: ServiceLocator) throws(ServiceLocatorError) {
         try serviceLocator.addService(ServiceA())
     }
 }
@@ -37,7 +37,7 @@ Secondly, `ModuleB` will look like this:
 import ServiceLocator
 
 class ModuleB: Module {
-    func registerServices(in serviceLocator: ServiceLocator) throws {
+    func registerServices(in serviceLocator: ServiceLocator) throws(ServiceLocatorError) {
         let serviceA = try serviceLocator.getServiceOfType(ServiceA.self)
         let serviceB = ServiceB(serviceA)
 

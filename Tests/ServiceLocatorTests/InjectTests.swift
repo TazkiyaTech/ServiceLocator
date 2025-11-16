@@ -1,23 +1,26 @@
 //
-//  File.swift
-//  
+//  InjectTests.swift
+//  ServiceLocatorTests
 //
 //  Created by Adil Hussain on 09/04/2021.
 //
 
-import XCTest
+import Testing
 @testable import ServiceLocator
 
-class InjectTests: XCTestCase {
+@MainActor
+class InjectTests {
     
     @Inject(via: serviceLocator) var someService: SomeService
     
-    func test_inject() {
-        XCTAssertEqual("Executed", someService.execute())
+    @Test
+    func inject() {
+        #expect(someService.execute() == "Executed")
     }
 }
 
-var serviceLocator: ServiceLocator = {
+@MainActor
+let serviceLocator: ServiceLocator = {
     let serviceLocator = ServiceLocator()
     
     try! serviceLocator.addService(SomeService())
