@@ -24,7 +24,6 @@ import Foundation
 /// ```
 /// @Inject(via: serviceLocator) var someService: SomeService
 /// ```
-///
 @propertyWrapper
 public struct Inject<T> {
     
